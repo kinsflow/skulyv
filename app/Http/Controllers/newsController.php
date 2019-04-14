@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace skulyv\Http\Controllers;
 
-use App\Assignment;
-use App\ClassName;
-use App\Post;
-use App\Profile;
-use App\Result;
-use App\User;
+use skulyv\Assignment;
+use skulyv\ClassName;
+use skulyv\Post;
+use skulyv\Profile;
+use skulyv\Result;
+use skulyv\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -21,7 +21,7 @@ class newsController extends Controller
      */
     public function index()
     {
-
+//        $post_id = Post::findOrFail($id);
         $id = Auth::user()->id;
         $profile = User::find($id);
         $class = Profile::find($id)->classes;
@@ -31,9 +31,12 @@ class newsController extends Controller
         $something = Assignment::all();
         $classes = ClassName::all();
         $medical = DB::table('medicals')->where('user_id', $id)->get();
-        $posts = Post::all();
-//        dd($medical);
-        return view('users.news', compact('classes','every','profile', 'class', 'assignments',
+        $posts = DB::table('posts')
+            ->select('posts.*', 'users.first_name')
+            ->join('users', 'posts.user_id', '=', 'users.id')->orderBy('id', 'desc')->take(5)->get();
+
+//        dd($posts);
+        return view('users.news', compact('posts','classes','every','profile', 'class', 'assignments',
             'something', 'result', 'medical'));
 
     }

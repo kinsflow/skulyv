@@ -18,8 +18,9 @@
 
     <!-- Custom styles for this template-->
     <link href="{{asset('css/home.css')}}" rel="stylesheet">
-    <link href="{{asset('css/news.css')}}" rel="stylesheet">
+    <style>
 
+    </style>
 </head>
 
 <body id="page-top">
@@ -28,14 +29,14 @@
 <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">skulyv</div>
+            <div class="sidebar-brand-text mx-3">skulyv_Admin</div>
         </a>
 
         <!-- Divider -->
@@ -62,37 +63,39 @@
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-cog"></i>
-                <span>Library</span>
+                <span>Update Library</span>
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">All Materials</h6>
 
-                    <a class="collapse-item" href="{{route('library.index')}}">My Library</a>
+                    <a class="collapse-item" href="{{route('library.create')}}">Add To Library</a>
+                    {{--<a class="collapse-item" href="{{route('library.edit', $id)}}">Delete From Library</a>--}}
+                    <a class="collapse-item" href="{{route('indexes')}}">All Books / Docs</a>
 
                 </div>
             </div>
         </li>
 
         <!-- Nav Item - Utilities Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-               aria-expanded="true" aria-controls="collapseUtilities">
-                <i class="fas fa-fw fa-wrench"></i>
-                <span>Assignments</span>
-            </a>
-            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                 data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Recent Assignments</h6>
-                    @foreach($assignments as $assignment)
+        {{--<li class="nav-item">--}}
+            {{--<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"--}}
+               {{--aria-expanded="true" aria-controls="collapseUtilities">--}}
+                {{--<i class="fas fa-fw fa-wrench"></i>--}}
+                {{--<span>Assignments</span>--}}
+            {{--</a>--}}
+            {{--<div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"--}}
+                 {{--data-parent="#accordionSidebar">--}}
+                {{--<div class="bg-white py-2 collapse-inner rounded">--}}
+                    {{--<h6 class="collapse-header">Recent Assignments</h6>--}}
+                    {{--@foreach($assignments as $assignment)--}}
                         {{--@for($assignment = 0; $assignment<=4; $assignment++)--}}
-                        <a class="collapse-item" href="{{route('download' , $assignment->id)}}">{{$assignment->file_path}}</a>
+                        {{--<a class="collapse-item" href="{{route('download' , $assignment->id)}}">{{$assignment->file_path}}</a>--}}
                         {{--@endfor--}}
-                    @endforeach
-                </div>
-            </div>
-        </li>
+                    {{--@endforeach--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</li>--}}
 
         <!-- Divider -->
         <hr class="sidebar-divider">
@@ -112,13 +115,12 @@
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Results</h6>
-                    <a class="collapse-item" href="{{route('result.show', $result->id)}}">All Results</a>
-                    {{--<a class="collapse-item" href="register.html">Register</a>--}}
-                    {{--<a class="collapse-item" href="forgot-password.html">Forgot Password</a>--}}
+                    {{--<a class="collapse-item" href="{{route('result.show', $result->id)}}">All Results</a>--}}
+
                     <div class="collapse-divider"></div>
                     <h6 class="collapse-header">Medical</h6>
                     <a class="collapse-item" href="{{route('medical.index')}}">Medical Profile</a>
-                    <a class="collapse-item" href="blank.html">Medical Update</a>
+                    {{--<a class="collapse-item" href="blank.html">Medical Update</a>--}}
                 </div>
             </div>
         </li>
@@ -210,8 +212,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <b><span class="mr-2 d-none d-lg-inline text-gray-600">{{ucfirst(Auth::user()->last_name) .' '.ucfirst(Auth::user()->first_name)}}</span></b>
-                            <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
-                        </a>
+                            <img height="150" src="/images/{{Auth::user()->profiles->photos ? Auth::user()->profiles->photos->file_path : 'no photo'}}" class="profile rounded-circle" alt="avatar">                        </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                              aria-labelledby="userDropdown">
@@ -259,166 +260,7 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    <!DOCTYPE html>
-                    <html lang="en">
-                    <head>
-                        <title>Bootstrap Example</title>
-                        <meta charset="utf-8">
-                        <meta name="viewport" content="width=device-width, initial-scale=1">
-                        <link rel="stylesheet" href="../../maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-                        <script src="../../ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-                        <script src="../../maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-                        <style>
-                            /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-                            .row.content {height: 1500px}
-
-                            /* Set gray background color and 100% height */
-                            .sidenav {
-                                background-color: #f1f1f1;
-                                height: 100%;
-                            }
-
-                            /* Set black background color, white text and some padding */
-                            footer {
-                                background-color: #555;
-                                color: white;
-                                padding: 15px;
-                            }
-
-                            /* On small screens, set height to 'auto' for sidenav and grid */
-                            @media screen and (max-width: 767px) {
-                                .sidenav {
-                                    height: auto;
-                                    padding: 15px;
-                                }
-                                .row.content {height: auto;}
-                            }
-                        </style>
-                    </head>
-                    <body>
-
-                    <div class="container-fluid">
-                        <div class="row content">
-
-
-                            <div class="col-sm-9">
-                                <h4><small>TARGETED POST</small></h4>
-                                <hr>
-                                <h2>{{$post_id->title}}</h2>
-                                <h5><span class="glyphicon glyphicon-time"></span> Post by
-                                    @foreach($poss as $pos)
-                                    <b>{{$pos->first_name .' - '. $pos->last_name}}</b>
-                                    @endforeach
-                                    <span class="text-black-50">{{$post_id->created_at->diffForHumans()}}</span></h5>
-                                {{--<h5><span class="label label-danger">Food</span> <span class="label label-primary">Ipsum</span></h5><br>--}}
-                               <br> <p>Food is my passion. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                <br><br>
-
-
-
-                                <h4>Leave a Comment:</h4>
-                                <form method="POST" action="/{{$post_id->id}}/comment" role="form">
-                                    {{csrf_field()}}
-                                    <div class="form-group">
-                                        <textarea name="comment" class="form-control" rows="3" required></textarea>
-                                    </div>
-                                    <button type="submit" class="btn btn-success">Submit</button>
-                                </form>
-                                <br><br>
-
-                                <p><span class="badge">{{count($comments)}}</span> Comment(s):</p><br>
-
-                                <div class="row">
-
-                                    @foreach($all_comment as $comment)
-                                    <div class="col-sm-10">
-                                        <h4>Comment By {{$comment->first_name}}<br>
-                                             <h6 class="text-primary font-weight-bold">
-                                                 <span class="font-italic text-danger">comment made at</span>
-                                                {{$comment->created_at ?  date('d-M-y', strtotime($comment->created_at)) : '"time not captured"'}}</h6></h4>
-                                            <p>{{$comment->body}}</p>
-                                         <br>
-                                    </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                            <div class="col-sm-3 rounded-circle">
-                                <img class="rounded-circle" height="150"  src="{{asset('images/1553507784AFOR 3.jpg')}}">
-                            </div>
-                        </div>
-                    </div>
-
-                    <footer class="container-fluid">
-                        <p>Footer Text</p>
-                    </footer>
-
-                    </body>
-
-                    <!-- Mirrored from www.w3schools.com/bootstrap/tryit.asp?filename=trybs_temp_blog&stacked=h by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 09 Jul 2018 23:25:42 GMT -->
-                    </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                    @yield('content')
 
                 </div>
             </div>
@@ -440,16 +282,6 @@
         <!-- Page level custom scripts -->
         <script src="js/demo/chart-area-demo.js"></script>
         <script src="js/demo/chart-pie-demo.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script>
-            // JS only for the switch
-            $(function(){
-                $("#switch-view").click(function(){
-                    $(this).find("button").toggleClass("active");
-                    $(".article-wrapper").toggleClass("bloc col-xs-12 col-xs-4");
-                });
-            });
-        </script>
 
 </body>
 

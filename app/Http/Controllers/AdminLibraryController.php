@@ -2,37 +2,31 @@
 
 namespace skulyv\Http\Controllers;
 
-use skulyv\Assignment;
-use skulyv\ClassName;
-use skulyv\Medical;
-use skulyv\Profile;
-use skulyv\Result;
-use skulyv\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use skulyv\Assignment;
+use skulyv\User;
+use skulyv\Profile;
 use Illuminate\Support\Facades\DB;
 
-class medicalController extends Controller
+class AdminLibraryController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function test()
     {
         $id = Auth::user()->id;
         $profile = User::find($id);
-        $class = Profile::find($id)->classes;
-        $assignments = Profile::find($id)->classes->assignments;
-        $result =  Result::find($id);
-        $every = Assignment::all();
+//        $class =  Profile::find($id)->classes;
+//        $assignments = Profile::find($id)->classes->assignments;
+//        $result =  Result::find($id);
+
         $something = Assignment::all();
-        $classes = ClassName::all();
-        $medical = DB::table('medicals')->where('user_id', $id)->get();
-//        dd($medical);
-        return view('users.medicalProfile', compact('classes','every','profile', 'class', 'assignments',
-            'something', 'result', 'medical'));
+//        dd($assignments);
+        return view('admin.adminShowLibrary', compact('profile', 'class', 'assignments', 'something', 'result'));
 
     }
 
@@ -43,7 +37,21 @@ class medicalController extends Controller
      */
     public function create()
     {
-        //
+        $id = Auth::user()->id;
+        $profile = User::find($id);
+        $query = DB::table('profiles')->where('user_id', $id)->get();
+        $test = $query->toArray();
+
+        $classes = $test[0]->class_id;;
+
+        // $class =  Profile::find($id)->classes;
+        $assignments =  DB::table('assignments')->where('class_name_id', $classes);;
+//        $result =  Result::find($id);
+
+        $something = Assignment::all();
+//        dd($assignments);
+        return view('admin.createLibrary', compact('id','profile', 'classes', 'assignments', 'query', 'result'));
+
     }
 
     /**
@@ -54,7 +62,15 @@ class medicalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $id = Auth::user()->profiles->class_id;
+        // dd( $request->file('file')->getClientOriginalName());
+        $create = Assignment::create([
+            'class_name_id' => $id,
+            'file_path' => time() . $request->file('file')->getClientOriginalName()
+        ]);
+        if($create){
+            return redirect()->back();
+        }
     }
 
     /**

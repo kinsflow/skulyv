@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace skulyv\Http\Controllers\Auth;
 
-use App\User;
-use App\Http\Controllers\Controller;
+use skulyv\ClassName;
+use skulyv\User;
+use skulyv\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -28,6 +29,11 @@ class RegisterController extends Controller
      *
      * @var string
      */
+
+    public function passData()
+    {
+
+    }
     protected $redirectTo = '/home';
 
     /**
@@ -40,6 +46,7 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -49,8 +56,12 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'middle_name' => ['required', 'string', 'max:255'],
+            'role' => ['required', 'integer', 'max:20'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'class_id' => ['required', 'integer', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -59,14 +70,21 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return \skulyv\User
      */
     protected function create(array $data)
     {
+//        dd($data['class_id']);
+
         return User::create([
-            'name' => $data['name'],
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'middle_name' => $data['middle_name'],
+            'role' => $data['role'],
             'email' => $data['email'],
+            'class_id' => $data['class_id'],
             'password' => Hash::make($data['password']),
+            ''
         ]);
     }
 }

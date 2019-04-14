@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace skulyv\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use skulyv\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -25,7 +26,35 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+
+//    public function url()
+//    {
+//        if(1 == Auth::user()->role)
+//        {
+//            return $home = '/home';
+//        }
+//        return $admin  = '/admin';
+//    }
+
+//    protected $redirectTo = '/home';
+    public function redirectTo()
+    {
+        // User role
+        $role = Auth::user()->role;
+
+        // Check user role
+        switch ($role) {
+            case 1:
+                return '/admin';
+                break;
+            case 0:
+                return '/home';
+                break;
+            default:
+                return '/login';
+                break;
+        }
+    }
 
     /**
      * Create a new controller instance.

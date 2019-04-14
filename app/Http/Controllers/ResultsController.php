@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace skulyv\Http\Controllers;
 
-use App\Assignment;
-use App\Profile;
-use App\Result;
-use App\User;
+use skulyv\Assignment;
+use skulyv\Profile;
+use skulyv\Result;
+use skulyv\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;

@@ -210,7 +210,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <b><span class="mr-2 d-none d-lg-inline text-gray-600">{{ucfirst(Auth::user()->last_name) .' '.ucfirst(Auth::user()->first_name)}}</span></b>
-                            <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                            <img height="150" src="/images/{{Auth::user()->profiles->photos ? Auth::user()->profiles->photos->file_path : 'no photo'}}" class="profile rounded-circle" alt="avatar">                        </a>
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -309,11 +309,7 @@
                     <html lang="en">
                     <head>
                         <title>Bootstrap Example</title>
-                        <meta charset="utf-8">
-                        <meta name="viewport" content="width=device-width, initial-scale=1">
-                        <link rel="stylesheet" href="../../maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-                        <script src="../../ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-                        <script src="../../maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
                         <style>
                             /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
                             .row.content {height: 1500px}
@@ -345,35 +341,21 @@
 
                     <div class="container-fluid">
                         <div class="row content">
-                            {{--<div class="col-sm-3 sidenav">--}}
-                                {{--<h4>John's Blog</h4>--}}
-                                {{--<ul class="nav nav-pills nav-stacked">--}}
-                                    {{--<li class="active"><a href="#section1">Home</a></li>--}}
-                                    {{--<li><a href="#section2">Friends</a></li>--}}
-                                    {{--<li><a href="#section3">Family</a></li>--}}
-                                    {{--<li><a href="#section3">Photos</a></li>--}}
-                                {{--</ul><br>--}}
-                                {{--<div class="input-group">--}}
-                                    {{--<input type="text" class="form-control" placeholder="Search Blog..">--}}
-                                    {{--<span class="input-group-btn">--}}
-          {{--<button class="btn btn-default" type="button">--}}
-            {{--<span class="glyphicon glyphicon-search"></span>--}}
-          {{--</button>--}}
-        {{--</span>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
+
 
                             <div class="col-sm-9 text-black">
 
 
                                 <h4><small>RECENT POSTS</small></h4>
                                 <hr>
-                                <h2>Officially Blogging</h2>
+                                @foreach($posts as $post)
+                                <a href="comment/{{$post->id}}"><h2>{{$post->title}}</h2></a>
                                 <h5><span class="glyphicon glyphicon-time text-black-50"></span>
-                                    Post by John Doe, Sep 24, 2015.</h5>
-                                <h5><span class="label label-success">Lorem</span></h5><br>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                    {{$post->first_name}}, {{$post->created_at}}</h5>
+                                <img class="rounded-circle" height="40"  src="{{asset('images/1553507784AFOR 3.jpg')}}">
+                                <p>{{$post->body}}</p>
                                 <hr>
+                                 @endforeach
 
 
 

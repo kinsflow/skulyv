@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace skulyv;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name', 'role', 'last_name', 'middle_name', 'email', 'password', 'class_id',
     ];
 
     /**
@@ -59,6 +59,14 @@ class User extends Authenticatable
     public  function photos()
     {
         return $this->belongsTo(Photo::class, 'photo_id');
+    }
+    public function role()
+    {
+        if($this->role == 1)
+        {
+            return true;
+        }
+        return false;
     }
 
 

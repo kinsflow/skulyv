@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace skulyv;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,4 +10,9 @@ class Assignment extends Model
     {
         return $this->belongsTo(ClassName::class);
     }
+
+    protected $fillable = [
+        'class_name_id',
+        'file_path'
+    ];
 }

@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Profile::class, function (Faker $faker) {
+$factory->define(skulyv\Profile::class, function (Faker $faker) {
     return [
         'user_id' => rand(1,4),
         'D_O_B' => $faker->time(now()),

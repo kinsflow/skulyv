@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Post::class, function (Faker $faker) {
+$factory->define(skulyv\Post::class, function (Faker $faker) {
     return [
         'user_id' => rand(1,3),
         'title' => $faker->title,

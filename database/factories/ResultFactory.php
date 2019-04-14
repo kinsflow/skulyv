@@ -1,6 +1,6 @@
 <?php
 
-use App\Result;
+use skulyv\Result;
 use Faker\Generator as Faker;
 
 $factory->define(Result::class, function (Faker $faker) {

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace skulyv\Http\Controllers;
 
-use App\Photo;
-use App\Profile;
+use skulyv\Photo;
+use skulyv\Profile;
 use Illuminate\Http\Request;
-use App\User;
+use skulyv\User;
 use Illuminate\Support\Facades\Auth;
 
 class UsersProfileController extends Controller

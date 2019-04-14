@@ -17,17 +17,21 @@ use Illuminate\Support\Facades\Response;
 Route::get('/', function () {
     return view('welcome');
 });
-
+//Route::post('/register', 'Auth/HomeController@passData');
 Auth::routes();
 
             //usersProfileController
 Route::resource('/profile', 'UsersProfileController');
 Route::post('/profile/{profile}', 'UsersProfileController@update');
 Route::post('/profile/{profile}/picture', 'UsersProfileController@picture')->name('profile.picture');
-
-
+Route::resource('/admin', 'AdminUsersController');
+Route::resource('/admin/library', 'AdminLibraryController');
+Route::get('/admin/library/all', 'AdminLibraryController@test')->name('indexes');
 
 Route::resource('/result', 'ResultsController');
+Route::resource('/comment', 'CommentController');
+Route::get('comment/{comment}', 'CommentController@shart');
+Route::post('/{id}/comment', 'CommentController@comment');
 
 
 
