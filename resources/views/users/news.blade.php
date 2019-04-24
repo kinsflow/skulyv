@@ -31,7 +31,7 @@
     <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ '/' }}">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
@@ -118,7 +118,7 @@
                     <div class="collapse-divider"></div>
                     <h6 class="collapse-header">Medical</h6>
                     <a class="collapse-item" href="{{route('medical.index')}}">Medical Profile</a>
-                    <a class="collapse-item" href="blank.html">Medical Update</a>
+                    {{-- <a class="collapse-item" href="blank.html">Medical Update</a> --}}
                 </div>
             </div>
         </li>
@@ -210,7 +210,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <b><span class="mr-2 d-none d-lg-inline text-gray-600">{{ucfirst(Auth::user()->last_name) .' '.ucfirst(Auth::user()->first_name)}}</span></b>
-                            <img height="150" src="/images/{{Auth::user()->profiles->photos ? Auth::user()->profiles->photos->file_path : 'no photo'}}" class="profile rounded-circle" alt="avatar">                        </a>
+                            {{-- <img height="150" src="/images/{{Auth::user()->profiles->photos ? Auth::user()->profiles->photos->file_path : 'no photo'}}" class="profile rounded-circle" alt="avatar">                        </a> --}}
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

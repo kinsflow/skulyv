@@ -11,7 +11,7 @@
 |
 */
 
-use App\Assignment;
+use skulyv\Assignment;
 use Illuminate\Support\Facades\Response;
 
 Route::get('/', function () {
@@ -26,7 +26,17 @@ Route::post('/profile/{profile}', 'UsersProfileController@update');
 Route::post('/profile/{profile}/picture', 'UsersProfileController@picture')->name('profile.picture');
 Route::resource('/admin', 'AdminUsersController');
 Route::resource('/admin/library', 'AdminLibraryController');
-Route::get('/admin/library/all', 'AdminLibraryController@test')->name('indexes');
+Route::get('/admin/doc/all', 'AdminLibraryController@test')->name('indexes');
+Route::post('/admin/library/{library}', 'AdminLibraryController@destroy');
+Route::post('/auth/news', 'newsController@news')->name('store.news');
+
+
+
+
+
+Route::get('/im/all', 'AllController@result')->name('results');
+Route::get('/student', 'AllController@student')->name('student');
+
 
 Route::resource('/result', 'ResultsController');
 Route::resource('/comment', 'CommentController');

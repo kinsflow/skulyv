@@ -114,12 +114,14 @@ class CommentController extends Controller
             ->where('comments.post_id', $post_id->id)->get();
         $all_comment = DB::table('comments')
             ->select('comments.*',  'users.first_name')
-            ->join('users', 'comments.user_id', '=', 'users.id')->orderBy('id', 'desc')->get();
+            ->join('users', 'comments.user_id', '=', 'users.id')->where('comments.post_id', $post_id->id)->orderBy('id', 'desc')->get();
 
         $poss = DB::table('users')->where('id', $post_id->id)->get();
-//dd($all_comment);
+        $image = $post_id->photos;
 
-        return view('users.comment', compact('comments', 'all_comment', 'poss', 'post_id', 'posts',
+// dd($image);
+
+        return view('users.comment', compact('comments', 'all_comment','image', 'poss', 'post_id', 'posts',
             'profile', 'class', 'assignments', 'something', 'result'));
 
 

@@ -31,7 +31,7 @@
     <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ '/' }}">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
@@ -305,43 +305,8 @@
 
 
 
-                    <!DOCTYPE html>
-                    <html lang="en">
-                    <head>
-                        <title>Bootstrap Example</title>
-                        <meta charset="utf-8">
-                        <meta name="viewport" content="width=device-width, initial-scale=1">
-                        <link rel="stylesheet" href="../../maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-                        <script src="../../ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-                        <script src="../../maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-                        <style>
-                            /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-                            .row.content {height: 1500px}
 
-                            /* Set gray background color and 100% height */
-                            .sidenav {
-                                background-color: #f1f1f1;
-                                height: 100%;
-                            }
 
-                            /* Set black background color, white text and some padding */
-                            footer {
-                                background-color: #555;
-                                color: white;
-                                padding: 15px;
-                            }
-
-                            /* On small screens, set height to 'auto' for sidenav and grid */
-                            @media screen and (max-width: 767px) {
-                                .sidenav {
-                                    height: auto;
-                                    padding: 15px;
-                                }
-                                .row.content {height: auto;}
-                            }
-                        </style>
-                    </head>
-                    <body>
 
                     <div class="container-fluid">
                         <div class="row content">
@@ -389,7 +354,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-3 rounded-circle">
-                                <img class="rounded-circle" height="150"  src="{{asset('images/1553507784AFOR 3.jpg')}}">
+                                <img class="rounded-circle" height="150"  src="/images/{{$image ? $image->file_path : dummy.jpg}}">
                             </div>
                         </div>
                     </div>
@@ -398,10 +363,6 @@
                         <p>Footer Text</p>
                     </footer>
 
-                    </body>
-
-                    <!-- Mirrored from www.w3schools.com/bootstrap/tryit.asp?filename=trybs_temp_blog&stacked=h by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 09 Jul 2018 23:25:42 GMT -->
-                    </html>
 
 
 

@@ -15,7 +15,7 @@
     <link href="{{asset('css/table.css')}}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Custom styles for this template-->
     <link href="{{asset('css/home.css')}}" rel="stylesheet">
     <style>
@@ -34,7 +34,7 @@
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
             <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
+                <i class="fa fa-laugh-wink"></i>
             </div>
             <div class="sidebar-brand-text mx-3">skulyv_Admin</div>
         </a>
@@ -45,7 +45,7 @@
         <!-- Nav Item - Dashboard -->
         <li class="nav-item active">
             <a class="nav-link" href="{{route('home')}}">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <i class="fa fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span>
             </a>
         </li>
@@ -62,7 +62,7 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-cog"></i>
+                <i class="fa fa-fw fa fa-cog"></i>
                 <span>Update Library</span>
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -77,25 +77,6 @@
             </div>
         </li>
 
-        <!-- Nav Item - Utilities Collapse Menu -->
-        {{--<li class="nav-item">--}}
-            {{--<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"--}}
-               {{--aria-expanded="true" aria-controls="collapseUtilities">--}}
-                {{--<i class="fas fa-fw fa-wrench"></i>--}}
-                {{--<span>Assignments</span>--}}
-            {{--</a>--}}
-            {{--<div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"--}}
-                 {{--data-parent="#accordionSidebar">--}}
-                {{--<div class="bg-white py-2 collapse-inner rounded">--}}
-                    {{--<h6 class="collapse-header">Recent Assignments</h6>--}}
-                    {{--@foreach($assignments as $assignment)--}}
-                        {{--@for($assignment = 0; $assignment<=4; $assignment++)--}}
-                        {{--<a class="collapse-item" href="{{route('download' , $assignment->id)}}">{{$assignment->file_path}}</a>--}}
-                        {{--@endfor--}}
-                    {{--@endforeach--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</li>--}}
 
         <!-- Divider -->
         <hr class="sidebar-divider">
@@ -109,17 +90,17 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                aria-expanded="true" aria-controls="collapsePages">
-                <i class="fas fa-fw fa-folder"></i>
+                <i class="fa fa-fw fa-folder"></i>
                 <span>Peronal Records</span>
             </a>
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Results</h6>
+                    {{-- <h6 class="collapse-header">Results</h6> --}}
                     {{--<a class="collapse-item" href="{{route('result.show', $result->id)}}">All Results</a>--}}
-
+                    <a class="collapse-item" href="#">Archives</a>
                     <div class="collapse-divider"></div>
-                    <h6 class="collapse-header">Medical</h6>
-                    <a class="collapse-item" href="{{route('medical.index')}}">Medical Profile</a>
+                    {{-- <h6 class="collapse-header">My Student</h6> --}}
+                    <a class="collapse-item" href="{{route('student')}}">My Student</a>
                     {{--<a class="collapse-item" href="blank.html">Medical Update</a>--}}
                 </div>
             </div>
@@ -127,16 +108,16 @@
 
         <!-- Nav Item - Charts -->
         <li class="nav-item">
-            <a class="nav-link" href="{{route('news.index')}}">
-                <i class="fas fa-fw fa-chart-area"></i>
+            <a class="nav-link" href="{{route('news.create')}}">
+                <i class="fa fa-fw fa-chart-area"></i>
                 <span>News</span></a>
         </li>
 
         <!-- Nav Item - Tables -->
         <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fas fa-fw fa-table"></i>
-                <span>FAQS</span></a>
+            <a class="nav-link" href="{{ route('results') }}">
+                <i class="fa fa-fw fa-table"></i>
+                <span>Results</span></a>
         </li>
 
         <!-- Divider -->
@@ -171,11 +152,15 @@
                                aria-label="Search" aria-describedby="basic-addon2">
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="button">
-                                <i class="fas fa-search fa-sm"></i>
+                                <i class="fa fa-search fa-sm"></i>
                             </button>
                         </div>
                     </div>
                 </form>
+
+                    @if(Session::has('flash'))
+                    <p class = "mt-3 alert alert-info">{{ Session::get('flash') }}</p>
+                    @endif
 
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">
@@ -184,7 +169,7 @@
                     <li class="nav-item dropdown no-arrow d-sm-none">
                         <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-search fa-fw"></i>
+                            <i class="fa fa-search fa-fw"></i>
                         </a>
                         <!-- Dropdown - Messages -->
                         <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
@@ -196,7 +181,7 @@
                                            aria-describedby="basic-addon2">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="button">
-                                            <i class="fas fa-search fa-sm"></i>
+                                            <i class="fa fa-search fa-sm"></i>
                                         </button>
                                     </div>
                                 </div>
@@ -212,20 +197,20 @@
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <b><span class="mr-2 d-none d-lg-inline text-gray-600">{{ucfirst(Auth::user()->last_name) .' '.ucfirst(Auth::user()->first_name)}}</span></b>
-                            <img height="150" src="/images/{{Auth::user()->profiles->photos ? Auth::user()->profiles->photos->file_path : 'no photo'}}" class="profile rounded-circle" alt="avatar">                        </a>
+                            {{-- <img height="150" src="/images/{{Auth::user()->profiles->photos ? Auth::user()->profiles->photos->file_path : 'no photo'}}" class="profile rounded-circle" alt="avatar">                        </a> --}}
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                              aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="{{route('profile.show', $profile)}}">
-                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                            {{-- <a class="dropdown-item" href="{{route('profile.show', $profile)}}"> --}}
+                                <i class="fa fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Profile
                             </a>
                             <a class="dropdown-item" href="#">
-                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                <i class="fa fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Settings
                             </a>
                             <a class="dropdown-item" href="#">
-                                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                <i class="fa fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Activity Log
                             </a>
                             <div class="dropdown-divider"></div>

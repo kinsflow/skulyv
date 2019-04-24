@@ -11,6 +11,7 @@ use skulyv\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use skulyv\Photo;
 
 class newsController extends Controller
 {
@@ -33,7 +34,7 @@ class newsController extends Controller
         $medical = DB::table('medicals')->where('user_id', $id)->get();
         $posts = DB::table('posts')
             ->select('posts.*', 'users.first_name')
-            ->join('users', 'posts.user_id', '=', 'users.id')->orderBy('id', 'desc')->take(5)->get();
+            ->join('users', 'posts.user_id', '=', 'users.id')->orderBy('id', 'desc')->get();
 
 //        dd($posts);
         return view('users.news', compact('posts','classes','every','profile', 'class', 'assignments',
@@ -48,7 +49,7 @@ class newsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.adminNews');
     }
 
     /**
@@ -59,7 +60,7 @@ class newsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
     }
 
     /**
@@ -105,5 +106,34 @@ class newsController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function news(Request $request)
+    {
+        if($file = $request->file('photo'))
+        {
+            $file_name = time() . $file->getClientOriginalName();
+            $file->move('images/', $file_name);
+            $upload = Photo::create(['file_path' => $file_name]);
+            $input['photo_id'] = $upload->id;
+        }
+
+
+       $post =  Post::create([
+            'user_id' => Auth::user()->id,
+            'title' => $request->title,
+            'body' => $request->body,
+            'photo_id' => $input['photo_id']
+            ]);
+
+
+            if ($post) {
+                return redirect()
+            ->back()
+            ->with('flash', 'post creation successful');
+            }else{
+                return 'not successful';
+            }
+
+
     }
 }

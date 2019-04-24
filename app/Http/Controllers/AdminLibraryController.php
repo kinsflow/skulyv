@@ -4,14 +4,18 @@ namespace skulyv\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use skulyv\Assignment;
 use skulyv\User;
+use skulyv\Result;
+
 use skulyv\Profile;
 use Illuminate\Support\Facades\DB;
 
 class AdminLibraryController extends Controller
 {
-    /**
+   /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -21,12 +25,12 @@ class AdminLibraryController extends Controller
         $id = Auth::user()->id;
         $profile = User::find($id);
 //        $class =  Profile::find($id)->classes;
-//        $assignments = Profile::find($id)->classes->assignments;
+       $something   = Auth::user()->profiles->classes;
 //        $result =  Result::find($id);
-
-        $something = Assignment::all();
-//        dd($assignments);
-        return view('admin.adminShowLibrary', compact('profile', 'class', 'assignments', 'something', 'result'));
+        $some = Assignment::orderBy('created_at', 'DESC')->get();
+        // $something = Assignment::find(4)->class;
+    //    dd($assignments);
+        return view('admin.adminShowLibrary', compact('profile','some', 'class', 'assignments', 'something', 'result'));
 
     }
 
@@ -40,15 +44,15 @@ class AdminLibraryController extends Controller
         $id = Auth::user()->id;
         $profile = User::find($id);
         $query = DB::table('profiles')->where('user_id', $id)->get();
+        global $global;
         $test = $query->toArray();
-
         $classes = $test[0]->class_id;;
 
         // $class =  Profile::find($id)->classes;
         $assignments =  DB::table('assignments')->where('class_name_id', $classes);;
 //        $result =  Result::find($id);
 
-        $something = Assignment::all();
+       // $something = Assignment::find($id)->class;
 //        dd($assignments);
         return view('admin.createLibrary', compact('id','profile', 'classes', 'assignments', 'query', 'result'));
 
@@ -64,12 +68,14 @@ class AdminLibraryController extends Controller
     {
         $id = Auth::user()->profiles->class_id;
         // dd( $request->file('file')->getClientOriginalName());
+        $file = $request->file('file');
         $create = Assignment::create([
             'class_name_id' => $id,
             'file_path' => time() . $request->file('file')->getClientOriginalName()
         ]);
-        if($create){
-            return redirect()->back();
+        $file->move('files/', $create->file_path);
+        if($create && $file){
+            return redirect('admin/doc/all')->with('flash', 'you added a new document');
         }
     }
 
@@ -92,7 +98,21 @@ class AdminLibraryController extends Controller
      */
     public function edit($id)
     {
-        //
+        // $id = $id;
+        $something = Assignment::find($id)->class;
+        $profile = User::find($id);
+        // $class = Profile::find($id)->classes;
+        $assignments = Assignment::find($id);
+        // $result = Result::find($id);
+
+        $something = Assignment::find($id)->class;
+    //     foreach($something as $some)
+    //     {
+
+    //     }
+    // dd($something->name);
+        return view('admin.editLibrary', compact('id','profile','something',  'classes', 'assignments', 'some', 'result'));
+
     }
 
     /**
@@ -104,7 +124,14 @@ class AdminLibraryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->file;
+        $save = Assignment::updateOrCreate([
+           'file_path' => $input
+        ]);
+        if($save)
+        {
+        return redirect('admin/doc/all');
+        }
     }
 
     /**
@@ -115,6 +142,17 @@ class AdminLibraryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $input = Assignment::destroy($id);
+        if($input)
+        {
+            // $name = Assignment::find($id)->class;
+            // dd($name);
+            $flash = Session::flash('flash', 'a file has been deleted ');
+            return redirect('admin/doc/all');
+        }
+    }
+    public function news()
+    {
+        return view('admin.adminNews');
     }
 }

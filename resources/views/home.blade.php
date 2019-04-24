@@ -30,7 +30,7 @@
     <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ '/' }}">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
@@ -116,7 +116,7 @@
                     <div class="collapse-divider"></div>
                     <h6 class="collapse-header">Medical</h6>
                     <a class="collapse-item" href="{{route('medical.index')}}">Medical Profile</a>
-                    <a class="collapse-item" href="blank.html">Medical Update</a>
+                    {{-- <a class="collapse-item" href="blank.html">Medical Update</a> --}}
                 </div>
             </div>
         </li>
@@ -327,11 +327,10 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Number Of
-                                            Friends
+                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">student_id
                                         </div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            friends
+                                            {{ Auth::user()->id }}
                                         </div>
                                     </div>
                                     <div class="col-auto">
@@ -350,8 +349,8 @@
 
                     <!-- Footer -->
                     <footer class="sticky-footer bg-white">
-                        <div class="container my-auto">
-                            <div class="copyright text-center my-auto">
+                        <div class="container ml-auto">
+                            <div class="copyright text-center ml-auto">
                                 <span>Copyright &copy; Your Website 2019</span>
                             </div>
                         </div>

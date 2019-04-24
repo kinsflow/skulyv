@@ -15,4 +15,10 @@ class Assignment extends Model
         'class_name_id',
         'file_path'
     ];
+
+
+    public function class()
+    {
+        return $this->belongsTo(ClassName::class, 'class_name_id');
+    }
 }
