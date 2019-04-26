@@ -28,13 +28,14 @@ class HomeController extends Controller
     public function index()
     {
         $id = Auth::user()->id;
+//        dd($id);
         $profile = User::find($id);
-        $class =  Profile::find($id)->classes;
-        $assignments = Profile::find($id)->classes->assignments;
-        $result =  Result::find($id);
+        $class =  Auth::user()->profiles->classes;
+        $assignments = Auth::user()->profiles->classes->assignments;
+         $result =  Result::find($id);
 
         $something = Assignment::all();
-//        dd($assignments);
+    //    dd($id);
         return view('home', compact('profile', 'class', 'assignments', 'something', 'result'));
     }
 }

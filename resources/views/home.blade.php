@@ -265,7 +265,7 @@
                                             <Name></Name>
                                         </div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            {{Auth::user()->payments->amount_paid}}
+                                            {{Auth::user()->payments ? Auth::user()->payments->amount_paid : 'not updated yet'}}
                                         </div>
                                     </div>
                                     <div class="col-auto">

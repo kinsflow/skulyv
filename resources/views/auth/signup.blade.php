@@ -5,10 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="text-center text-capitalize card-header">{{ __('Register') }}</div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                <div class="card-body rounded mb-5 bg-info">
+                    <form method="POST" action="/registration">
                         @csrf
 
                         <div class="form-group row">
@@ -44,8 +44,8 @@
 
                             <div class="col-md-6">
                                 <select class="form-control" name="role">
-                                    <option value="1">Student</option>
-                                    <option value="2">Staff/Admin</option>
+                                    <option value="0">Student</option>
+                                    <option value="1">Staff/Admin</option>
                                 </select>
                             </div>
                         </div>

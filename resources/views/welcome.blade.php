@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Skulyv</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -12,13 +12,7 @@
 
     </head>
     <body>
-               <head>
-                    <title>Google Homepage</title>
-                    <link rel="stylesheet" type="text/css" href="reset.css" />
-                    <link rel="stylesheet" type="text/css" href="styles.css" />
-                </head>
 
-                <body>
                 <div id="container">
                     <div id="topbar">
                         <ul>
@@ -53,7 +47,7 @@
                                 {{--</div>--}}
                             {{--@endif--}}
                             <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
+                            <li><a href="{{ route('signup') }}">Register</a></li>
                         </ul>
                     </div>
                     <img style="" id="logo" alt="google" src="https://res.cloudinary.com/wilfredxd/image/upload/v1471790654/google-logo_paxdp8.png" />
@@ -64,7 +58,7 @@
                     </div>
                     <div id="search-options">
                         <div class="button"><a href="{{ route('login') }}">Login</a></div>
-                        <div class="button"><a href="{{ route('register') }}">Register</a></div>
+                        <div class="button"><a href="{{ route('signup') }}">Register</a></div>
                     </div>
                     <!-- This tanslates the homepage to different languages -->
                     <div id="languages">

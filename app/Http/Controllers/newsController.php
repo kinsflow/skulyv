@@ -25,8 +25,8 @@ class newsController extends Controller
 //        $post_id = Post::findOrFail($id);
         $id = Auth::user()->id;
         $profile = User::find($id);
-        $class = Profile::find($id)->classes;
-        $assignments = Profile::find($id)->classes->assignments;
+        $class =  Auth::user()->profiles->classes;
+        $assignments = Auth::user()->profiles->classes->assignments;
         $result =  Result::find($id);
         $every = Assignment::all();
         $something = Assignment::all();

@@ -113,6 +113,7 @@
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Results</h6>
+                    {{--@if(Auth::user()->)--}}
                     <a class="collapse-item" href="{{route('result.show', $result->id)}}">All Results</a>
                     {{--<a class="collapse-item" href="register.html">Register</a>--}}
                     {{--<a class="collapse-item" href="forgot-password.html">Forgot Password</a>--}}

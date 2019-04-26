@@ -101,8 +101,8 @@ class AdminLibraryController extends Controller
         // $id = $id;
         $something = Assignment::find($id)->class;
         $profile = User::find($id);
-        // $class = Profile::find($id)->classes;
-        $assignments = Assignment::find($id);
+        $classes =  Auth::user()->profiles->classes;
+        $assignments = Auth::user()->profiles->classes->assignments;
         // $result = Result::find($id);
 
         $something = Assignment::find($id)->class;

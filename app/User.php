@@ -45,7 +45,7 @@ class User extends Authenticatable
 
     public function results()
     {
-        return $this->hasMany(Result::class);
+        return $this->hasMany(Result::class, 'user_id');
     }
 
     public function payments()

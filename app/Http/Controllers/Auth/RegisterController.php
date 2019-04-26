@@ -4,9 +4,11 @@ namespace skulyv\Http\Controllers\Auth;
 
 use skulyv\ClassName;
 use skulyv\User;
+use skulyv\Profile;
 use skulyv\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
@@ -34,7 +36,24 @@ class RegisterController extends Controller
     {
 
     }
-    protected $redirectTo = '/home';
+    public function redirectTo()
+    {
+        // User role
+        $role = Auth::user()->role;
+
+        // Check user role
+        switch ($role) {
+            case 1:
+                return '/admin';
+                break;
+            case 0:
+                return '/home';
+                break;
+            default:
+                return '/login';
+                break;
+        }
+    }
 
     /**
      * Create a new controller instance.
@@ -76,7 +95,7 @@ class RegisterController extends Controller
     {
 //        dd($data['class_id']);
 
-        return User::create([
+          $user = User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'middle_name' => $data['middle_name'],
@@ -84,7 +103,12 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'class_id' => $data['class_id'],
             'password' => Hash::make($data['password']),
-            ''
+
+        ]);
+
+            Profile::create([
+            'user_id' => $user->id,
+            'class_id' => $data['class_id'],
         ]);
     }
 }
