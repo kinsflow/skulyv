@@ -102,9 +102,12 @@
 
                             <div class="col-md-6">
                                 <select class="form-control" name="class_id">
-                                    @foreach($classes as $class)
+                                    {{--  @foreach($classes as $class)
                                     <option value="{{$class->id}}">{{$class->name}}</option>
-                                    @endforeach
+                                    @endforeach  --}}
+                                    <option value="1">computer science</option>
+                                    <option value="2">microbiology</option>
+                                    <option value="3">check</option>
                                 </select>
                             </div>
                         </div>
