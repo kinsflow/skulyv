@@ -20,11 +20,11 @@ class libraryController extends Controller
         $profile = User::find($id);
         $class =  Auth::user()->profiles->classes;
         $assignments = Auth::user()->profiles->classes->assignments;
-        $result =  Auth::user()->results->id;
+        $result =  Auth::user();
         $every = Assignment::all();
         $something = Assignment::all();
         $classes = ClassName::all();
-        dd($result);
+        // dd($result);
         return view('users.library', compact('classes','every','profile', 'class', 'assignments', 'something', 'result'));
     }
 }

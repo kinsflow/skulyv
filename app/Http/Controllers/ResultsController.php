@@ -64,7 +64,7 @@ class ResultsController extends Controller
     public function show($id)
     {
 //        $id = Auth::user()->id;
-        $profile = User::find($id);
+        $profile = Auth::id();
         $class =  Auth::user()->profiles->classes;
         $assignments = Auth::user()->profiles->classes->assignments;
         $result =  Result::find($id);
@@ -75,7 +75,7 @@ class ResultsController extends Controller
         $year2018 = DB::table('results')->where('year', '2018')->where('user_id', $id)->get();
         $year2015 = DB::table('results')->where('year', '2015')->where('user_id', $id)->get();
 
-//        dd($year2018);
+    //    dd($profile);
         return view('users.results', compact(
             'profile', 'class', 'assignments', 'something', 'result', 'results','year2018', 'year2015'
         ));

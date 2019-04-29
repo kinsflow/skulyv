@@ -49,7 +49,7 @@ class UsersProfileController extends Controller
      */
     public function show($id)
     {
-        $profile = User::find(1);
+        $profile = User::find($id);
         return view('users.profile', compact('profile'));
     }
 
@@ -61,6 +61,7 @@ class UsersProfileController extends Controller
      */
     public function edit($id)
     {
+        // dd($id);
         $profile = User::find($id);
         //dd(auth()->user()->profiles->photos->file_path);
         return view('users.editprofile', compact('profile'));
@@ -77,7 +78,8 @@ class UsersProfileController extends Controller
     {
         $input = $request->all();
         $input = $request->except('_token');
-        dd($input['status']);
+        $profile = Profile::find($id);
+        // dd($input['status']);
 //        $input = ([
 //            'D_O_B'=> $request->dob,
 //            'department' => $request->department,
@@ -85,7 +87,8 @@ class UsersProfileController extends Controller
 //            'current_level' => $request->current_level,
 //            'phone_number' => $request->phone_number,
 //        ]);
-        if($update = Profile::find($id)->update($input))
+// $profile->update($input);
+        if($update = $profile->save($input))
         {
             return 'its fine';
         }else{

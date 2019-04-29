@@ -110,7 +110,7 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Results</h6>
 
-                    <a class="collapse-item" href="{{route('result.show', $result->id)}}">All Results</a>
+                    <a class="collapse-item" href="{{route('result.show', $result ? $result->id : 0 )}}">All Results</a>
                     {{--<a class="collapse-item" href="register.html">Register</a>--}}
                     {{--<a class="collapse-item" href="forgot-password.html">Forgot Password</a>--}}
                     <div class="collapse-divider"></div>
@@ -213,7 +213,7 @@
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                              aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="{{route('profile.show', $profile)}}">
+                           <a class="dropdown-item" href="{{route('profile.show', $profile )}}">
                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Profile
                             </a>
@@ -242,7 +242,7 @@
 
             </nav>
             <!-- End of Topbar -->
-
+            @if(Auth::user()->results)
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
@@ -311,10 +311,15 @@
                     </div>
 
 
+
                     </div>
                 </div>
+                @endif
+
             </div>
 
+
+            {{ 'no result avaialable' }}
             <!-- Bootstrap core JavaScript-->
             <script src="{{asset('js/jquery.js')}}"></script>
             <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>

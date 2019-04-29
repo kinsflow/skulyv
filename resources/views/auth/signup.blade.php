@@ -8,6 +8,7 @@
                 <div class="text-center text-capitalize card-header">{{ __('Register') }}</div>
 
                 <div class="card-body rounded mb-5 bg-info">
+                        @include('users.error')
                     <form method="POST" action="/registration">
                         @csrf
 
@@ -117,7 +118,7 @@
                             </div>
                         </div>
                     </form>
-                    @include('users.error')
+
                 </div>
             </div>
         </div>
